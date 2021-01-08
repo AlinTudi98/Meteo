@@ -1,3 +1,5 @@
+package ro.mta.facc.selab.tema2;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,12 +16,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         FXMLLoader loader = new FXMLLoader();
-        MeteoController controller = new MeteoController();
         try{
-            loader.setLocation(this.getClass().getResource("view/MeteoView.fxml"));
+            loader.setLocation(this.getClass().getResource("/View/MeteoView.fxml"));
             primaryStage.setScene(new Scene(loader.load()));
             primaryStage.show();
-            controller.initialize("src/main/resources/inputFile.txt");
         } catch (IOException e){
             e.printStackTrace();
         }

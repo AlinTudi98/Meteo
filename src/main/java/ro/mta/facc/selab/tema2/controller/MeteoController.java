@@ -2,7 +2,9 @@ package ro.mta.facc.selab.tema2.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.collections.FXCollections;
@@ -47,8 +49,8 @@ public class MeteoController {
     }
 
     @FXML
-    public void initialize(String filename) throws FileNotFoundException {
-        File file = new File(filename);
+    public void initialize() throws FileNotFoundException {
+        File file = new File("src/main/resources/inputFile.txt");
         Scanner scanner = new Scanner(file);
         scanner.nextLine();
         while(scanner.hasNextLine()){
@@ -66,7 +68,6 @@ public class MeteoController {
         }
 
         ObservableList<String> options = FXCollections.observableArrayList();
-        options.add("Select country...");
 
         for(Location loc: list){
             if(!options.contains(loc.country)){
@@ -74,17 +75,22 @@ public class MeteoController {
             }
         }
 
-        countryBox.setItems(options);
+        countryBox.getItems().addAll(options);
 
-        options.clear();
-        options.add("Select city...");
+    }
 
-        for(Location loc: list){
-            if(countryBox.getValue().equals(loc.country))
-                options.add(loc.city);
+    @FXML
+    private void loadCities(ActionEvent event){
+        ObservableList<String> options = FXCollections.observableArrayList();
+        if(this.countryBox.getValue()!=null){
+            for(Location loc:list){
+                if(this.countryBox.getValue().equals(loc.country)){
+                    options.add(loc.city);
+                }
+            }
+
+            cityBox.getItems().addAll(options);
         }
-
-        cityBox.setItems(options);
     }
 }
 
