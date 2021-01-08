@@ -4,10 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="488.0" prefWidth="697.0"
-            xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ro.mta.facc.selab.tema2.MeteoView">
+<AnchorPane prefHeight="488.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ro.mta.facc.selab.tema2.controller.MeteoController">
    <children>
       <ComboBox fx:id="countryBox" layoutX="78.0" layoutY="109.0" prefHeight="26.0" prefWidth="204.0" />
       <Label layoutX="78.0" layoutY="67.0" prefHeight="24.0" prefWidth="123.0" text="Country:">
@@ -31,13 +28,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="78.0" layoutY="277.0" prefHeight="26.0" prefWidth="204.0" text="Weather" textFill="#5e5e5e">
+      <Label fx:id="weatherLabel" layoutX="78.0" layoutY="277.0" prefHeight="26.0" prefWidth="204.0" text="Weather" textFill="#5e5e5e">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="PrecipLabel" layoutX="433.0" layoutY="269.0" prefHeight="26.0" prefWidth="204.0" text="Precipitation: " />
+      <Label fx:id="precipLabel" layoutX="433.0" layoutY="269.0" prefHeight="26.0" prefWidth="204.0" text="Precipitation: " />
       <Label fx:id="humidLabel" layoutX="433.0" layoutY="303.0" prefHeight="26.0" prefWidth="204.0" text="Humidity:" />
-      <Label layoutX="433.0" layoutY="335.0" prefHeight="24.0" prefWidth="204.0" text="Wind:" />
+      <Label fx:id="windLabel" layoutX="433.0" layoutY="335.0" prefHeight="24.0" prefWidth="204.0" text="Wind:" />
    </children>
 </AnchorPane>
