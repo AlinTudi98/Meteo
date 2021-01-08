@@ -8,10 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.collections.FXCollections;
+import org.json.JSONObject;
 import ro.mta.facc.selab.tema2.model.MeteoModel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -89,8 +92,17 @@ public class MeteoController {
                 }
             }
 
+            cityBox.getItems().clear();
             cityBox.getItems().addAll(options);
         }
+    }
+
+    public void loadData(ActionEvent actionEvent) {
+        if(this.countryBox.getValue()==null || this.cityBox.getValue()==null){
+            return;
+        }
+
+        this.meteoData = new MeteoModel((String)this.countryBox.getValue(),(String)this.cityBox.getValue());
     }
 }
 
