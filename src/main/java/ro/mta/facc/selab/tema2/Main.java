@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ro.mta.facc.selab.tema2.controller.MeteoController;
+import ro.mta.facc.selab.tema2.model.MeteoModel;
 
 import java.io.IOException;
 

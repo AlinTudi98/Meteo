@@ -37,7 +37,7 @@ public class MeteoController {
     private Label weatherLabel;
 
     @FXML
-    private Label precipLabel;
+    private Label descrLabel;
     @FXML
     private Label humidLabel;
     @FXML
@@ -97,12 +97,25 @@ public class MeteoController {
         }
     }
 
-    public void loadData(ActionEvent actionEvent) {
+    public void loadData(ActionEvent actionEvent) throws InterruptedException {
         if(this.countryBox.getValue()==null || this.cityBox.getValue()==null){
             return;
         }
 
         this.meteoData = new MeteoModel((String)this.countryBox.getValue(),(String)this.cityBox.getValue());
+        Thread.sleep(100);
+        this.showData();
+    }
+
+    private void showData() {
+
+        this.descrLabel.setText(meteoData.getDescrString());
+        this.humidLabel.setText(meteoData.getHumidityString());
+        this.locLabel.setText(meteoData.getLocationString());
+        this.timeLabel.setText(meteoData.getTimeString());
+        this.windLabel.setText(meteoData.getWindString());
+        this.weatherLabel.setText(meteoData.getWeatherString());
+
     }
 }
 

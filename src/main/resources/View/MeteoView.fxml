@@ -33,7 +33,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="precipLabel" layoutX="433.0" layoutY="269.0" prefHeight="26.0" prefWidth="204.0" text="Precipitation: " />
+      <Label fx:id="descrLabel" layoutX="433.0" layoutY="269.0" prefHeight="26.0" prefWidth="204.0" text="Details: " />
       <Label fx:id="humidLabel" layoutX="433.0" layoutY="303.0" prefHeight="26.0" prefWidth="204.0" text="Humidity:" />
       <Label fx:id="windLabel" layoutX="433.0" layoutY="335.0" prefHeight="24.0" prefWidth="204.0" text="Wind:" />
    </children>

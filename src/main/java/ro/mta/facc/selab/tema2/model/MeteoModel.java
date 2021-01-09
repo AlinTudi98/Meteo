@@ -1,16 +1,37 @@
 package ro.mta.facc.selab.tema2.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MeteoModel {
     StringProperty country, city, locationString;
     StringProperty timeString;
     StringProperty weatherString;
-    StringProperty humidityString, precipitationString, windString;
+    StringProperty humidityString, descrString, windString;
 
-    IntegerProperty temp, precipitation, wind;
+
+    private static Map<String,Object> jsonToMap(String str){
+        Map<String,Object> map = new Gson().fromJson(str,new TypeToken<HashMap<String,Object>>() {}.getType());
+        return map;
+    }
 
     public MeteoModel(String country, String city) {
         this.country = new SimpleStringProperty(country);
@@ -18,6 +39,106 @@ public class MeteoModel {
 
         String loc = city + ", " + country.toUpperCase();
         this.locationString = new SimpleStringProperty(loc);
+
+        String APIKey = "815485b1ad9fa554e90bf9cadcc08404";
+        String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + this.city.get() +
+                "," + this.country.get() + "&appid=" + APIKey;
+
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+
+
+
+            int status = con.getResponseCode();
+            if (status >= 299)
+                throw new Exception("Bad Request");
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+
+            con.disconnect();
+
+            Map<String,Object> respMap = jsonToMap(content.toString());
+            Map<String,Object> mainMap = jsonToMap(respMap.get("main").toString());
+            Map<String, Object > windMap = jsonToMap (respMap.get("wind").toString());
+
+            List<Object> weatherJSON = (List<Object>)respMap.get("weather");
+            Map<String,Object> weatherMap = (Map<String,Object>)weatherJSON.get(0);
+
+            humidityString = new SimpleStringProperty( "Humidity: " + mainMap.get("humidity") + "%");
+
+
+
+            double deg = Double.parseDouble(windMap.get("deg").toString());
+            String dir = "N";
+
+            if( deg >=348.75 || deg <= 11.25)
+                dir = new String("N");
+            if(deg > 11.25 && deg <= 33.75)
+                dir = new String("NNE");
+            if(deg > 33.75 && deg <= 56.25)
+                dir = new String("NE");
+            if(deg > 56.25 && deg <= 78.75)
+                dir = new String("ENE");
+            if(deg > 78.75 && deg <= 101.25)
+                dir = new String("E");
+            if(deg > 101.25 && deg <= 123.75)
+                dir = new String("ESE");
+            if(deg > 123.75 && deg <= 146.25)
+                dir = new String("SE");
+            if(deg > 146.25 && deg <= 168.75)
+                dir = new String("SSE");
+            if(deg > 168.75 && deg <= 191.25)
+                dir = new String("S");
+            if(deg > 191.25 && deg <= 213.75)
+                dir = new String("SSW");
+            if(deg > 213.75 && deg <= 236.25)
+                dir = new String("SW");
+            if(deg > 236.25 && deg <= 258.75)
+                dir = new String("WSW");
+            if(deg > 258.75 && deg <= 281.25)
+                dir = new String("W");
+            if(deg > 281.25 && deg <= 303.75)
+                dir = new String("WNW");
+            if(deg > 303.75 && deg <= 326.25)
+                dir = new String("NW");
+            if(deg > 326.25 && deg < 348.75)
+                dir = new String("NNW");
+
+            windString = new SimpleStringProperty("Wind: " + windMap.get("speed") + "m/s, " + dir);
+
+            descrString = new SimpleStringProperty("Details: " + weatherMap.get("description"));
+
+            weatherString = new SimpleStringProperty("Weather: " + weatherMap.get("main") + ", " +
+                    (Float.parseFloat(mainMap.get("temp").toString()) - 272.15) + "°C");
+
+            double timestamp = Double.parseDouble(respMap.get("dt").toString());
+            LocalDateTime ldt = Instant.ofEpochSecond((long)timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            timeString = new SimpleStringProperty("Time: "+ ldt.toString());
+
+
+
+        }
+        catch(MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getCountry() {
@@ -92,16 +213,16 @@ public class MeteoModel {
         this.humidityString.set(humidityString);
     }
 
-    public String getPrecipitationString() {
-        return precipitationString.get();
+    public String getDescrString() {
+        return descrString.get();
     }
 
-    public StringProperty precipitationStringProperty() {
-        return precipitationString;
+    public StringProperty descrStringProperty() {
+        return descrString;
     }
 
-    public void setPrecipitationString(String precipitationString) {
-        this.precipitationString.set(precipitationString);
+    public void setDescrString(String descrString) {
+        this.descrString.set(descrString);
     }
 
     public String getWindString() {
@@ -116,39 +237,4 @@ public class MeteoModel {
         this.windString.set(windString);
     }
 
-    public int getTemp() {
-        return temp.get();
-    }
-
-    public IntegerProperty tempProperty() {
-        return temp;
-    }
-
-    public void setTemp(int temp) {
-        this.temp.set(temp);
-    }
-
-    public int getPrecipitation() {
-        return precipitation.get();
-    }
-
-    public IntegerProperty precipitationProperty() {
-        return precipitation;
-    }
-
-    public void setPrecipitation(int precipitation) {
-        this.precipitation.set(precipitation);
-    }
-
-    public int getWind() {
-        return wind.get();
-    }
-
-    public IntegerProperty windProperty() {
-        return wind;
-    }
-
-    public void setWind(int wind) {
-        this.wind.set(wind);
-    }
 }
