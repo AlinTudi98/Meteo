@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -117,9 +119,11 @@ public class MeteoModel {
             windString = new SimpleStringProperty("Wind: " + windMap.get("speed") + "m/s, " + dir);
 
             descrString = new SimpleStringProperty("Details: " + weatherMap.get("description"));
-
+            double tempK = Double.parseDouble(mainMap.get("temp").toString());
+            tempK -= 272.15;
+            double trunc = BigDecimal.valueOf(tempK).setScale(2, RoundingMode.HALF_UP).doubleValue();
             weatherString = new SimpleStringProperty("Weather: " + weatherMap.get("main") + ", " +
-                    (Float.parseFloat(mainMap.get("temp").toString()) - 272.15) + "°C");
+                    (trunc) + "°C");
 
             double timestamp = Double.parseDouble(respMap.get("dt").toString());
             LocalDateTime ldt = Instant.ofEpochSecond((long)timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime();

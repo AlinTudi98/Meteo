@@ -18,17 +18,17 @@
          </font>
       </Label>
       <ComboBox fx:id="cityBox" layoutX="433.0" layoutY="109.0" onAction="#loadData" prefHeight="26.0" prefWidth="204.0" />
-      <Label fx:id="locLabel" layoutX="78.0" layoutY="212.0" prefHeight="26.0" prefWidth="204.0" text="Location" textFill="#5e5e5e">
+      <Label fx:id="locLabel" layoutX="78.0" layoutY="212.0" prefHeight="26.0" prefWidth="310.0" text="Location" textFill="#5e5e5e">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="timeLabel" layoutX="78.0" layoutY="243.0" prefHeight="26.0" prefWidth="204.0" text="Time" textFill="#5e5e5e">
+      <Label fx:id="timeLabel" layoutX="78.0" layoutY="243.0" prefHeight="26.0" prefWidth="310.0" text="Time" textFill="#5e5e5e">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="weatherLabel" layoutX="78.0" layoutY="277.0" prefHeight="26.0" prefWidth="204.0" text="Weather" textFill="#5e5e5e">
+      <Label fx:id="weatherLabel" layoutX="78.0" layoutY="277.0" prefHeight="26.0" prefWidth="310.0" text="Weather" textFill="#5e5e5e">
          <font>
             <Font size="15.0" />
          </font>
