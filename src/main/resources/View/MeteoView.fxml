@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="488.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ro.mta.facc.selab.tema2.controller.MeteoController">
+<AnchorPane prefHeight="488.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ro.mta.facc.selab.tema2.controller.MeteoController">
    <children>
-      <ComboBox fx:id="countryBox" layoutX="78.0" layoutY="109.0" onAction="#loadCities" prefHeight="26.0" prefWidth="204.0" />
-      <Label layoutX="78.0" layoutY="67.0" prefHeight="24.0" prefWidth="123.0" text="Country:">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="433.0" layoutY="67.0" text="City:">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cityBox" layoutX="433.0" layoutY="109.0" onAction="#loadData" prefHeight="26.0" prefWidth="204.0" />
-      <Label fx:id="locLabel" layoutX="78.0" layoutY="212.0" prefHeight="26.0" prefWidth="310.0" text="Location" textFill="#5e5e5e">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label fx:id="timeLabel" layoutX="78.0" layoutY="243.0" prefHeight="26.0" prefWidth="310.0" text="Time" textFill="#5e5e5e">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="weatherLabel" layoutX="78.0" layoutY="277.0" prefHeight="26.0" prefWidth="310.0" text="Weather" textFill="#5e5e5e">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="descrLabel" layoutX="433.0" layoutY="269.0" prefHeight="26.0" prefWidth="204.0" text="Details: " />
-      <Label fx:id="humidLabel" layoutX="433.0" layoutY="303.0" prefHeight="26.0" prefWidth="204.0" text="Humidity:" />
-      <Label fx:id="windLabel" layoutX="433.0" layoutY="335.0" prefHeight="24.0" prefWidth="204.0" text="Wind:" />
+      <Pane id="backgroundPane" fx:id="backgroundPane" prefHeight="488.0" prefWidth="755.0" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="490.0" layoutY="64.0" text="City:">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cityBox" layoutX="443.0" layoutY="110.0" onAction="#loadData" prefHeight="26.0" prefWidth="204.0" />
+            <ComboBox fx:id="countryBox" layoutX="98.0" layoutY="110.0" onAction="#loadCities" prefHeight="26.0" prefWidth="204.0" />
+            <Label layoutX="98.0" layoutY="64.0" prefHeight="24.0" prefWidth="123.0" text="Country:">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgView" fitHeight="100.0" fitWidth="100.0" layoutX="98.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="tempLabel" layoutX="254.0" layoutY="361.0" prefHeight="83.0" prefWidth="293.0" text="7°C">
+               <font>
+                  <Font name="System Bold" size="50.0" />
+               </font></Label>
+         </children></Pane>
+      <Pane prefHeight="200.0" prefWidth="758.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <Label fx:id="locLabel" layoutX="65.0" layoutY="14.0" prefHeight="26.0" prefWidth="310.0" text="Location">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="timeLabel" layoutX="65.0" layoutY="56.0" prefHeight="26.0" prefWidth="310.0" text="Time">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="weatherLabel" layoutX="65.0" layoutY="90.0" prefHeight="26.0" prefWidth="310.0" text="Weather">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="humidLabel" layoutX="431.0" layoutY="52.0" prefHeight="35.0" prefWidth="204.0" text="Humidity:">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="windLabel" layoutX="431.0" layoutY="86.0" prefHeight="35.0" prefWidth="204.0" text="Wind:">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="pressureLabel" layoutX="431.0" layoutY="10.0" prefHeight="35.0" prefWidth="204.0" text="Pressure: " />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

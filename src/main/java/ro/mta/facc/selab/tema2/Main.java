@@ -19,7 +19,8 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         try{
             loader.setLocation(this.getClass().getResource("/View/MeteoView.fxml"));
-            primaryStage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+            primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e){
             e.printStackTrace();

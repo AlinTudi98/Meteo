@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.collections.FXCollections;
+import javafx.scene.image.ImageView;
 import org.json.JSONObject;
 import ro.mta.facc.selab.tema2.model.MeteoModel;
 
@@ -35,13 +36,17 @@ public class MeteoController {
     private Label timeLabel;
     @FXML
     private Label weatherLabel;
-
     @FXML
-    private Label descrLabel;
+    private Label tempLabel;
     @FXML
     private Label humidLabel;
     @FXML
     private Label windLabel;
+    @FXML
+    private Label pressureLabel;
+
+    @FXML
+    private ImageView imgView;
 
     public MeteoController(List<Location> list) {
         this.list = list;
@@ -80,6 +85,9 @@ public class MeteoController {
 
         countryBox.getItems().addAll(options);
 
+        this.meteoData = new MeteoModel(list.get(0).country,list.get(0).city);
+        showData();
+
     }
 
     @FXML
@@ -108,14 +116,14 @@ public class MeteoController {
     }
 
     private void showData() {
-
-        this.descrLabel.setText(meteoData.getDescrString());
+        this.pressureLabel.setText(meteoData.getPressureString());
+        this.tempLabel.setText(meteoData.getTempString());
         this.humidLabel.setText(meteoData.getHumidityString());
         this.locLabel.setText(meteoData.getLocationString());
         this.timeLabel.setText(meteoData.getTimeString());
         this.windLabel.setText(meteoData.getWindString());
         this.weatherLabel.setText(meteoData.getWeatherString());
-
+        this.imgView.setImage(meteoData.getWeatherImg());
     }
 }
 

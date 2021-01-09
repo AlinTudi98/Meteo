@@ -2,15 +2,11 @@ package ro.mta.facc.selab.tema2.model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.json.JSONObject;
+import javafx.scene.image.Image;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.HttpURLConnection;
@@ -19,6 +15,7 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +24,36 @@ public class MeteoModel {
     StringProperty country, city, locationString;
     StringProperty timeString;
     StringProperty weatherString;
-    StringProperty humidityString, descrString, windString;
+    StringProperty humidityString, windString;
+
+    public String getPressureString() {
+        return pressureString.get();
+    }
+
+    public StringProperty pressureStringProperty() {
+        return pressureString;
+    }
+
+    public void setPressureString(String pressureString) {
+        this.pressureString.set(pressureString);
+    }
+
+    StringProperty pressureString;
+
+    public String getTempString() {
+        return tempString.get();
+    }
+
+    public StringProperty tempStringProperty() {
+        return tempString;
+    }
+
+    public void setTempString(String tempString) {
+        this.tempString.set(tempString);
+    }
+
+    StringProperty tempString;
+    Image weatherImg;
 
 
     private static Map<String,Object> jsonToMap(String str){
@@ -116,19 +142,27 @@ public class MeteoModel {
             if(deg > 326.25 && deg < 348.75)
                 dir = new String("NNW");
 
-            windString = new SimpleStringProperty("Wind: " + windMap.get("speed") + "m/s, " + dir);
+            windString = new SimpleStringProperty("Wind: " + windMap.get("speed") + " m/s, " + dir);
 
-            descrString = new SimpleStringProperty("Details: " + weatherMap.get("description"));
+
             double tempK = Double.parseDouble(mainMap.get("temp").toString());
             tempK -= 272.15;
             double trunc = BigDecimal.valueOf(tempK).setScale(2, RoundingMode.HALF_UP).doubleValue();
+            tempString = new SimpleStringProperty("" + trunc + "°C");
             weatherString = new SimpleStringProperty("Weather: " + weatherMap.get("main") + ", " +
-                    (trunc) + "°C");
+                    capitalize(weatherMap.get("description").toString()));
+
+            pressureString = new SimpleStringProperty("Pressure: " + (long)Double.parseDouble(mainMap.get("pressure").toString()) + " hPa");
+
+            weatherImg = new Image(new FileInputStream("src/main/resources/Img/" + weatherMap.get("icon") + "@2x.png"));
 
             double timestamp = Double.parseDouble(respMap.get("dt").toString());
             LocalDateTime ldt = Instant.ofEpochSecond((long)timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-            timeString = new SimpleStringProperty("Time: "+ ldt.toString());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE MMM yyyy, HH:mm:ss");
+            String formatDateTime = ldt.format(formatter);
+
+            timeString = new SimpleStringProperty("Time: "+ formatDateTime);
 
 
 
@@ -143,6 +177,17 @@ public class MeteoModel {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    private String capitalize(String str) {
+        String[] strings = str.split(" ");
+        String toRet = "";
+        for(String string:strings){
+            toRet += string.substring(0,1).toUpperCase();
+            toRet += string.substring(1);
+            toRet += " ";
+        }
+        return toRet.substring(0,toRet.length()-1);
     }
 
     public String getCountry() {
@@ -217,17 +262,6 @@ public class MeteoModel {
         this.humidityString.set(humidityString);
     }
 
-    public String getDescrString() {
-        return descrString.get();
-    }
-
-    public StringProperty descrStringProperty() {
-        return descrString;
-    }
-
-    public void setDescrString(String descrString) {
-        this.descrString.set(descrString);
-    }
 
     public String getWindString() {
         return windString.get();
@@ -241,4 +275,11 @@ public class MeteoModel {
         this.windString.set(windString);
     }
 
+    public Image getWeatherImg() {
+        return weatherImg;
+    }
+
+    public void setWeatherImg(Image weatherImg) {
+        this.weatherImg = weatherImg;
+    }
 }
