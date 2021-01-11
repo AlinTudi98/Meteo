@@ -13,9 +13,6 @@ import javafx.scene.image.ImageView;
 import ro.mta.facc.selab.tema2.model.MeteoModel;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Stream;
 
