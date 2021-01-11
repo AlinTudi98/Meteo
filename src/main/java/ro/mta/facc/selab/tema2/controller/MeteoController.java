@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,9 @@ public class MeteoController {
     private Label windLabel;
     @FXML
     private Label pressureLabel;
+
+    @FXML
+    private Button refreshButton;
 
     @FXML
     private ImageView imgView;
@@ -119,6 +123,13 @@ public class MeteoController {
         this.windLabel.setText(meteoData.getWindString());
         this.weatherLabel.setText(meteoData.getWeatherString());
         this.imgView.setImage(meteoData.getWeatherImg());
+    }
+
+    public void refreshInfo(ActionEvent actionEvent) {
+        if(this.countryBox.getValue() == null || this.cityBox.getValue() == null)
+            return;
+        this.meteoData = new MeteoModel((String)this.countryBox.getValue(),(String)this.cityBox.getValue());
+        this.showData();
     }
 }
 

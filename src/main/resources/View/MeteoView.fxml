@@ -26,6 +26,7 @@
                <font>
                   <Font name="System Bold" size="50.0" />
                </font></Label>
+            <Button fx:id="refreshButton" layoutX="522.0" layoutY="389.0" mnemonicParsing="false" onAction="#refreshInfo" prefHeight="26.0" prefWidth="94.0" text="Refresh" />
          </children></Pane>
       <Pane prefHeight="200.0" prefWidth="758.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="200.0">
          <children>
