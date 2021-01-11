@@ -25,34 +25,8 @@ public class MeteoModel {
     StringProperty timeString;
     StringProperty weatherString;
     StringProperty humidityString, windString;
-
-    public String getPressureString() {
-        return pressureString.get();
-    }
-
-    public StringProperty pressureStringProperty() {
-        return pressureString;
-    }
-
-    public void setPressureString(String pressureString) {
-        this.pressureString.set(pressureString);
-    }
-
-    StringProperty pressureString;
-
-    public String getTempString() {
-        return tempString.get();
-    }
-
-    public StringProperty tempStringProperty() {
-        return tempString;
-    }
-
-    public void setTempString(String tempString) {
-        this.tempString.set(tempString);
-    }
-
     StringProperty tempString;
+    StringProperty pressureString;
     Image weatherImg;
 
 
@@ -186,6 +160,30 @@ public class MeteoModel {
             toRet += " ";
         }
         return toRet.substring(0,toRet.length()-1);
+    }
+
+    public String getPressureString() {
+        return pressureString.get();
+    }
+
+    public StringProperty pressureStringProperty() {
+        return pressureString;
+    }
+
+    public void setPressureString(String pressureString) {
+        this.pressureString.set(pressureString);
+    }
+
+    public String getTempString() {
+        return tempString.get();
+    }
+
+    public StringProperty tempStringProperty() {
+        return tempString;
+    }
+
+    public void setTempString(String tempString) {
+        this.tempString.set(tempString);
     }
 
     public String getCountry() {
