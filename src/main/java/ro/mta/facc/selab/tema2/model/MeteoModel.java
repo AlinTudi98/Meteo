@@ -110,43 +110,43 @@ public class MeteoModel {
             String dir = "N";
 
             if( deg >=348.75 || deg <= 11.25)
-                dir = new String("N");
+                dir = "N";
             if(deg > 11.25 && deg <= 33.75)
-                dir = new String("NNE");
+                dir = "NNE";
             if(deg > 33.75 && deg <= 56.25)
-                dir = new String("NE");
+                dir = "NE";
             if(deg > 56.25 && deg <= 78.75)
-                dir = new String("ENE");
+                dir = "ENE";
             if(deg > 78.75 && deg <= 101.25)
-                dir = new String("E");
+                dir = "E";
             if(deg > 101.25 && deg <= 123.75)
-                dir = new String("ESE");
+                dir = "ESE";
             if(deg > 123.75 && deg <= 146.25)
-                dir = new String("SE");
+                dir = "SE";
             if(deg > 146.25 && deg <= 168.75)
-                dir = new String("SSE");
+                dir = "SSE";
             if(deg > 168.75 && deg <= 191.25)
-                dir = new String("S");
+                dir = "S";
             if(deg > 191.25 && deg <= 213.75)
-                dir = new String("SSW");
+                dir = "SSW";
             if(deg > 213.75 && deg <= 236.25)
-                dir = new String("SW");
+                dir = "SW";
             if(deg > 236.25 && deg <= 258.75)
-                dir = new String("WSW");
+                dir = "WSW";
             if(deg > 258.75 && deg <= 281.25)
-                dir = new String("W");
+                dir = "W";
             if(deg > 281.25 && deg <= 303.75)
-                dir = new String("WNW");
+                dir = "WNW";
             if(deg > 303.75 && deg <= 326.25)
-                dir = new String("NW");
+                dir = "NW";
             if(deg > 326.25 && deg < 348.75)
-                dir = new String("NNW");
+                dir = "NNW";
 
             windString = new SimpleStringProperty("Wind: " + windMap.get("speed") + " m/s, " + dir);
 
 
             double tempK = Double.parseDouble(mainMap.get("temp").toString());
-            tempK -= 272.15;
+            tempK -= 273.15;
             double trunc = BigDecimal.valueOf(tempK).setScale(2, RoundingMode.HALF_UP).doubleValue();
             tempString = new SimpleStringProperty("" + trunc + "°C");
             weatherString = new SimpleStringProperty("Weather: " + weatherMap.get("main") + ", " +
@@ -163,8 +163,6 @@ public class MeteoModel {
             String formatDateTime = ldt.format(formatter);
 
             timeString = new SimpleStringProperty("Time: "+ formatDateTime);
-
-
 
         }
         catch(MalformedURLException e)

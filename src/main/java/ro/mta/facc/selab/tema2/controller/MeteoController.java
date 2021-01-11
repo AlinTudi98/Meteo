@@ -4,18 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.collections.FXCollections;
 import javafx.scene.image.ImageView;
-import org.json.JSONObject;
 import ro.mta.facc.selab.tema2.model.MeteoModel;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -105,6 +99,7 @@ public class MeteoController {
         }
     }
 
+    @FXML
     public void loadData(ActionEvent actionEvent) throws InterruptedException {
         if(this.countryBox.getValue()==null || this.cityBox.getValue()==null){
             return;
