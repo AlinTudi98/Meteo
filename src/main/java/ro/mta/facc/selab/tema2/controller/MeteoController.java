@@ -1,5 +1,4 @@
 package ro.mta.facc.selab.tema2.controller;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
@@ -11,13 +10,32 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import ro.mta.facc.selab.tema2.model.MeteoModel;
-
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-
+/**
+ * This class represents the controller of the MVC Architecture of this App.
+ * This class gets the information from the model and manages the correct
+ * display of that information in the GUI.
+ *
+ * @author Alin Tudose
+ */
 public class MeteoController {
+
+    /**
+     * meteoData The model in which we store the information to display at
+     * a given time. This variable will be modified every time we load a
+     * different city or we hit the Refresh button
+     *
+     * list The list with the identification information for the cities
+     * that we make available to display. It is loaded from the inputFile.txt file.
+     *
+     * countryMap The map which we use to get the full country name from the
+     * ISO Country Code.
+     *
+     * The @FXML tagged members are instances of the objects displayed in the GUI.
+     */
     private MeteoModel meteoData;
     private List<Location> list;
     private Map<String,String> countryMap;
@@ -48,11 +66,26 @@ public class MeteoController {
     @FXML
     private ImageView imgView;
 
+    /**
+     * Function to parse JSON objects using the Google JSON API.
+     *
+     * @param str The string containing the JSON object.
+     * @return The map built after the structure of the JSON object.
+     */
     private static Map<String,Object> jsonToMap(String str){
         Map<String,Object> map = new Gson().fromJson(str,new TypeToken<HashMap<String,Object>>() {}.getType());
         return map;
     }
 
+    /**
+     * This function is used to create a backward association betwen
+     * the values and the keys of a Map
+     * @param map The map from which we want to extract the info
+     * @param value The value we want the key of.
+     * @param <K> The type of the keys in the map
+     * @param <V> The type of the values in the map
+     * @return A stream containing all the keys that have the wanted value in the map
+     */
     public <K, V> Stream<K> keys(Map<K, V> map, V value) {
         return map
                 .entrySet()
@@ -61,16 +94,30 @@ public class MeteoController {
                 .map(Map.Entry::getKey);
     }
 
+    /**
+     * Constructor with parameters. Used to instantiate the list and
+     * countryMap members
+     * @param list the value of the preloaded list that will be copied in the list member
+     */
     public MeteoController(List<Location> list) {
         this.list = list;
         this.countryMap = new HashMap<String,String>();
     }
 
+    /**
+     * Constructor without parameters. Used to instantiate the list and
+     * countryMap members as empty ArrayList and HashMap, respectively
+     */
     public MeteoController(){
         this.list = new ArrayList<Location>();
         this.countryMap = new HashMap<String,String>();
     }
 
+    /**
+     * Function used to read the list of cities from the inputFile.txt file,
+     * and load the country options in the countries ComboBox.
+     * @throws FileNotFoundException if the file inputFile.txt cannot be found.
+     */
     @FXML
     public void initialize() throws FileNotFoundException {
         File file = new File("src/main/resources/inputFile.txt");
@@ -118,6 +165,12 @@ public class MeteoController {
 
     }
 
+    /**
+     * Function used to load the cities of the selected country in the
+     * cities ComboBox.
+     * @param event The event that triggered the function call from the GUI.
+     *              (Selection changed in the countries ComboBox).
+     */
     @FXML
     private void loadCities(ActionEvent event){
         ObservableList<String> options = FXCollections.observableArrayList();
@@ -133,17 +186,26 @@ public class MeteoController {
         }
     }
 
+    /**
+     * Function used to instantiate the meteoData model with the
+     * selected information.
+     * @param actionEvent The event that triggered the function call from the GUI.
+     *                    (Selection changed in the cities ComboBox).
+     */
     @FXML
-    public void loadData(ActionEvent actionEvent) throws InterruptedException {
+    public void loadData(ActionEvent actionEvent) {
         if(this.countryBox.getValue()==null || this.cityBox.getValue()==null){
             return;
         }
 
         this.meteoData = new MeteoModel((String)keys(countryMap,this.countryBox.getValue().toString()).findFirst().get(),(String)this.cityBox.getValue());
-        Thread.sleep(100);
         this.showData();
     }
 
+    /**
+     * Function used to load the data from the meteoData model class
+     * into the GUI.
+     */
     private void showData() {
         this.pressureLabel.setText(meteoData.getPressureString());
         this.tempLabel.setText(meteoData.getTempString());
@@ -155,6 +217,13 @@ public class MeteoController {
         this.imgView.setImage(meteoData.getWeatherImg());
     }
 
+    /**
+     * Function used to reinstantiate the meteoData member with the same current
+     * city information, for an update of the info displayed in the GUI.
+     * @param actionEvent The event that triggered the function call from the GUI.
+     *                    (Clicked the Refresh Button).
+     */
+    @FXML
     public void refreshInfo(ActionEvent actionEvent) {
         if(this.countryBox.getValue() == null || this.cityBox.getValue() == null)
             return;

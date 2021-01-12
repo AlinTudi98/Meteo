@@ -1,11 +1,9 @@
 package ro.mta.facc.selab.tema2.model;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -20,7 +18,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class represents the model of the MVC Arhitecture for this App.
+ * This class makes GET requests to the OpenWeather.org API to
+ * get all of the displayed information on the GUI.
+ *
+ * @author Alin Tudose
+ */
+
 public class MeteoModel {
+
+    /**
+     * Members of this class are the necessary information strings that will be
+     * displayed in the GUI, and the identification information for the city that
+     * we want to display.
+     * The weatherImg is loaded locally from the resources/Img folder, based on the
+     * icon value in the returned JSON from the GET request.
+     */
     StringProperty country, city, locationString;
     StringProperty timeString;
     StringProperty weatherString;
@@ -29,11 +43,41 @@ public class MeteoModel {
     StringProperty pressureString;
     Image weatherImg;
 
-
+    /**
+     * Function to parse JSON objects using the Google JSON API.
+     *
+     * @param str The string containing the JSON object.
+     * @return The map built after the structure of the JSON object.
+     */
     private static Map<String,Object> jsonToMap(String str){
         Map<String,Object> map = new Gson().fromJson(str,new TypeToken<HashMap<String,Object>>() {}.getType());
         return map;
     }
+
+    /**
+     * Function to capitalize all the words in a string.
+     *
+     * @param str The string to be capitalized.
+     * @return The capitalized string.
+     */
+    private String capitalize(String str) {
+        String[] strings = str.split(" ");
+        String toRet = "";
+        for(String string:strings){
+            toRet += string.substring(0,1).toUpperCase();
+            toRet += string.substring(1);
+            toRet += " ";
+        }
+        return toRet.substring(0,toRet.length()-1);
+    }
+
+    /**
+     * The class constructor. Here is where the GET request is made, and
+     * all the information is parsed and loaded into the class.
+     *
+     * @param country The country ISO code or name, for identification of the city.
+     * @param city The city name to get the information for.
+     */
 
     public MeteoModel(String country, String city) {
         this.country = new SimpleStringProperty(country);
@@ -149,17 +193,6 @@ public class MeteoModel {
         catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    private String capitalize(String str) {
-        String[] strings = str.split(" ");
-        String toRet = "";
-        for(String string:strings){
-            toRet += string.substring(0,1).toUpperCase();
-            toRet += string.substring(1);
-            toRet += " ";
-        }
-        return toRet.substring(0,toRet.length()-1);
     }
 
     public String getPressureString() {
