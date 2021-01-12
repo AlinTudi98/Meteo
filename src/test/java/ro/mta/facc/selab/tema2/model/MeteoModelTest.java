@@ -52,7 +52,7 @@ public class MeteoModelTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         model = new MeteoModel("RO","Slatina");
 
         country = "RO";
