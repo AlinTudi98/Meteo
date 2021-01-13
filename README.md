@@ -4,7 +4,7 @@
 ## Table of Contents
 - [Descriere](#descriere)
 - [Utilizare](#utilizare)
-- [Diagrama de clase](#diagrama-de-clase)
+- [Diagrama de Clase](#diagrama-de-clase)
 - [Diagrama de Secventa](#diagrama-de-secventa)  
 - [Realizator](#realizator)
 
@@ -27,9 +27,11 @@ Aplicatia se poate rula direct din linie de comanda, sau se poate fabrica un JAR
 usoara.
 
 ## Diagrama de clase
+
 ![ClassDiagram.png](ClassDiagram.png "Diagrama de clase")
 
 ## Diagrama de secventa
+
 ![SequenceDiagram.png](SequenceDiagram.png "Diagrama de secventa")
 
 ## Realizator
