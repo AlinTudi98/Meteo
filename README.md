@@ -24,6 +24,9 @@ Campurile trebuie sa fie separate prin **Tab**.
 Aplicatia se poate rula direct din linie de comanda, sau se poate fabrica un JAR pentru executia mai rapida, si mai
 usoara.
 
+## Diagrama de clase
+![ClassDiagram.png](ClassDiagram.png "Diagrama de clase")
+
 ## Realizator
 
 :man_student: Tudose F.-D. Alin-Romeo

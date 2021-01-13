@@ -193,7 +193,7 @@ public class MeteoController {
      *                    (Selection changed in the cities ComboBox).
      */
     @FXML
-    public void loadData(ActionEvent actionEvent) {
+    private void loadData(ActionEvent actionEvent) {
         if(this.countryBox.getValue()==null || this.cityBox.getValue()==null){
             return;
         }
@@ -224,7 +224,7 @@ public class MeteoController {
      *                    (Clicked the Refresh Button).
      */
     @FXML
-    public void refreshInfo(ActionEvent actionEvent) {
+    private void refreshInfo(ActionEvent actionEvent) {
         if(this.countryBox.getValue() == null || this.cityBox.getValue() == null)
             return;
         this.meteoData = new MeteoModel((String)keys(countryMap,this.countryBox.getValue().toString()).findFirst().get(),(String)this.cityBox.getValue());

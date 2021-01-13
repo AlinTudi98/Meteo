@@ -199,116 +199,40 @@ public class MeteoModel {
         return pressureString.get();
     }
 
-    public StringProperty pressureStringProperty() {
-        return pressureString;
-    }
-
-    public void setPressureString(String pressureString) {
-        this.pressureString.set(pressureString);
-    }
-
     public String getTempString() {
         return tempString.get();
-    }
-
-    public StringProperty tempStringProperty() {
-        return tempString;
-    }
-
-    public void setTempString(String tempString) {
-        this.tempString.set(tempString);
     }
 
     public String getCountry() {
         return country.get();
     }
 
-    public StringProperty countryProperty() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country.set(country);
-    }
-
     public String getCity() {
         return city.get();
-    }
-
-    public StringProperty cityProperty() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city.set(city);
     }
 
     public String getLocationString() {
         return locationString.get();
     }
 
-    public StringProperty locationStringProperty() {
-        return locationString;
-    }
-
-    public void setLocationString(String locationString) {
-        this.locationString.set(locationString);
-    }
-
     public String getTimeString() {
         return timeString.get();
-    }
-
-    public StringProperty timeStringProperty() {
-        return timeString;
-    }
-
-    public void setTimeString(String timeString) {
-        this.timeString.set(timeString);
     }
 
     public String getWeatherString() {
         return weatherString.get();
     }
 
-    public StringProperty weatherStringProperty() {
-        return weatherString;
-    }
-
-    public void setWeatherString(String weatherString) {
-        this.weatherString.set(weatherString);
-    }
-
     public String getHumidityString() {
         return humidityString.get();
     }
 
-    public StringProperty humidityStringProperty() {
-        return humidityString;
-    }
-
-    public void setHumidityString(String humidityString) {
-        this.humidityString.set(humidityString);
-    }
-
-
     public String getWindString() {
         return windString.get();
-    }
-
-    public StringProperty windStringProperty() {
-        return windString;
-    }
-
-    public void setWindString(String windString) {
-        this.windString.set(windString);
     }
 
     public Image getWeatherImg() {
         return weatherImg;
     }
 
-    public void setWeatherImg(Image weatherImg) {
-        this.weatherImg = weatherImg;
-    }
 }
