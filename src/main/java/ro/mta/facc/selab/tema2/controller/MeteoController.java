@@ -207,14 +207,43 @@ public class MeteoController {
      * into the GUI.
      */
     private void showData() {
-        this.pressureLabel.setText(meteoData.getPressureString());
-        this.tempLabel.setText(meteoData.getTempString());
-        this.humidLabel.setText(meteoData.getHumidityString());
-        this.locLabel.setText(meteoData.getLocationString());
-        this.timeLabel.setText(meteoData.getTimeString());
-        this.windLabel.setText(meteoData.getWindString());
-        this.weatherLabel.setText(meteoData.getWeatherString());
-        this.imgView.setImage(meteoData.getWeatherImg());
+        try {
+            File log = new File("Log.txt");
+            log.createNewFile();
+            FileWriter logWriter = new FileWriter(log,true);
+            logWriter.write("/******************************************************************/\n");
+            logWriter.write("Location: "+ meteoData.getLocationString() + "\n");
+
+            this.pressureLabel.setText(meteoData.getPressureString());
+            logWriter.write(meteoData.getPressureString()+ "\n");
+
+            this.tempLabel.setText(meteoData.getTempString());
+            logWriter.write("Temperature: "+ meteoData.getTempString()+"\n");
+
+            this.humidLabel.setText(meteoData.getHumidityString());
+            logWriter.write(meteoData.getHumidityString()+"\n");
+
+            this.locLabel.setText(meteoData.getLocationString());
+
+            this.timeLabel.setText(meteoData.getTimeString());
+            logWriter.write(meteoData.getTimeString()+"\n");
+
+            this.windLabel.setText(meteoData.getWindString());
+            logWriter.write(meteoData.getWindString()+"\n");
+
+            this.weatherLabel.setText(meteoData.getWeatherString());
+            logWriter.write(meteoData.getWeatherString()+"\n");
+
+            this.imgView.setImage(meteoData.getWeatherImg());
+
+            logWriter.write("/******************************************************************/\n\n");
+
+            logWriter.close();
+
+        }catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
     }
 
     /**

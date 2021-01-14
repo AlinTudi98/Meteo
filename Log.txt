@@ -1,0 +1,50 @@
+/******************************************************************/
+Location: Razvilka, RU
+Pressure: 1006 hPa
+Temperature: -14.0°C
+Humidity: 85.0%
+Time: Friday Jan 2021, 00:17:58
+Wind: 2.0 m/s, NW
+Weather: Snow, Snow
+/******************************************************************/
+
+/******************************************************************/
+Location: Bucharest, RO
+Pressure: 1008 hPa
+Temperature: -0.93°C
+Humidity: 93.0%
+Time: Friday Jan 2021, 00:20:29
+Wind: 3.09 m/s, W
+Weather: Mist, Mist
+/******************************************************************/
+
+/******************************************************************/
+Location: Slatina, RO
+Pressure: 1009 hPa
+Temperature: -1.73°C
+Humidity: 86.0%
+Time: Friday Jan 2021, 00:21:23
+Wind: 4.63 m/s, NW
+Weather: Clear, Clear Sky
+/******************************************************************/
+
+/******************************************************************/
+Location: Razvilka, RU
+Pressure: 1006 hPa
+Temperature: -14.0°C
+Humidity: 85.0%
+Time: Friday Jan 2021, 00:17:58
+Wind: 2.0 m/s, NW
+Weather: Snow, Snow
+/******************************************************************/
+
+/******************************************************************/
+Location: Razvilka, RU
+Pressure: 1006 hPa
+Temperature: -14.0°C
+Humidity: 85.0%
+Time: Friday Jan 2021, 00:17:58
+Wind: 2.0 m/s, NW
+Weather: Snow, Snow
+/******************************************************************/
+
